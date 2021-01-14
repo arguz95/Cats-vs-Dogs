@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 """
 Created on Thu Oct 29 21:09:18 2020
-
-@author: arguz
+Author: Arnaud Guzman-Annès
+McGill University
 """
 
 #pip install tensorflow
@@ -31,40 +30,32 @@ test_set = test_datagen.flow_from_directory('data/validation',
 
 #initializing
 cnn = tf.keras.models.Sequential()
-'''
-keep same code
-'''
+
 #Convolutional layer
-cnn.add(tf.keras.layers.Conv2D(filters=32, kernel_size=3, activation='relu', input_shape=[64, 64, 3]))
+cnn.add(tf.keras.layers.Conv1D(filters=32, kernel_size=3, activation='relu', input_shape=[64, 64, 3]))
 '''
-Change to  Conv layer to 1D and shape
+Change to  Conv layer to 1D or 2D and shape
 '''
 #Convo
 
 #Pooling layer
-cnn.add(tf.keras.layers.MaxPool2D(pool_size=2, strides=2))
+cnn.add(tf.keras.layers.MaxPool1D(pool_size=2, strides=2))
 '''
-Change to  MaxPool layer to 1D
+Change to  MaxPool layer to 1D or 2D
 '''
 #Convolutional and pool 2
-cnn.add(tf.keras.layers.Conv2D(filters=32, kernel_size=3, activation='relu'))
-cnn.add(tf.keras.layers.MaxPool2D(pool_size=2, strides=2))
+cnn.add(tf.keras.layers.Conv1D(filters=32, kernel_size=3, activation='relu'))
+cnn.add(tf.keras.layers.MaxPool1D(pool_size=2, strides=2))
 '''
-Change to Conv layer to 1D
-Change to  MaxPool layer to 1D
+Change to Conv layer to 1D or 2D
+Change to  MaxPool layer to 1D or 2D
 '''
 
 #Flatenning
 cnn.add(tf.keras.layers.Flatten())
-'''
-keep same code
-'''
 
 #Full conection  (ANN)
 cnn.add(tf.keras.layers.Dense(units=128, activation='relu'))
-'''
-keep same code
-'''
 
 #Output layer
 #1 and sigmoid as our categories ara binary 
@@ -82,13 +73,15 @@ change metrics to MSE
 
 '''
 Epochs = 25 
+OR
+Epochs = 15
 '''
 
 #training CNN and evaluation on test set
 cnn.fit(x = training_set, validation_data = test_set, epochs = 25)
 '''
-we can start with 15 epochs, check accuracy and try higher number in need)
-As we have 10,000 rows I guess It'll take some time to run...
+we can start with 15 epochs, check accuracy and try higher number if needed)
+As we have 10,000 rows; I guess it'll take some time to run...
 '''
 
 ############ Testing ############
